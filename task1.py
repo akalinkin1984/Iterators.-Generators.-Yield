@@ -2,10 +2,10 @@ class FlatIterator:
 
     def __init__(self, list_of_list):
         self.list_of_list = list_of_list
-        self.main_idx = 0
-        self.nested_idx = -1
 
     def __iter__(self):
+        self.main_idx = 0
+        self.nested_idx = -1
         return self
 
     def __next__(self):

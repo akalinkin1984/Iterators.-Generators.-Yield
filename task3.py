@@ -1,16 +1,29 @@
-## НЕ СДЕЛАНО
 class FlatIterator:
 
     def __init__(self, list_of_list):
         self.list_of_list = list_of_list
 
     def __iter__(self):
-        ...
+        self.stack = []
+        self.current_iterator = iter(self.list_of_list)
         return self
 
     def __next__(self):
-        ...
-        return item
+        while True:
+            try:
+                self.item = next(self.current_iterator)
+            except StopIteration:
+                if not self.stack:
+                    raise StopIteration
+                else:
+                    self.current_iterator = self.stack.pop()
+                    continue
+
+            if isinstance(self.item, list):
+                self.stack.append(self.current_iterator)
+                self.current_iterator = iter(self.item)
+            else:
+                return self.item
 
 
 def test_3():
